@@ -1,0 +1,35 @@
+class Solution {
+    public int calPoints(String[] operations) {
+        Stack<Integer> stack = new Stack<>();
+        int result = 0; // result should be the sum of the stack ops
+        for(String ops : operations){
+            
+            if(ops.equals("+")){
+                int top = stack.pop(); // would be 2 here
+                int secondTop = stack.peek();//would be 1
+                int sum = top + secondTop;// 2 + 1 = 3
+
+                stack.push(top); // push 2 first
+                stack.push(sum); // push 3 next
+                result+= sum; // result will be adding just the 3 (sum)
+            }
+            else if(ops.equals("D")){
+                int doub = stack.peek(); // would be 5 here
+                stack.push(doub * 2); // 5*2 is pushed
+                result += (doub*2); // will be adding the double value
+            }
+            else if(ops.equals("C")){
+                int removed = stack.pop(); // would be 3 here, removed
+                result -= removed; // remove the value at the top
+            }
+            else{
+                int score = Integer.parseInt(ops);
+                stack.push(score);
+                result+= score;
+            }
+            
+            
+        }
+        return result;
+    }
+}
